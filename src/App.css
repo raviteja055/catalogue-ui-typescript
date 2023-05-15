@@ -1,38 +1,83 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+/* Apply the Roboto font family to the body */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.logo-container img {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.productList img {
+  width: 100%;
+  height: 185px;
+}
+
+.productList {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  margin-top: 15px;
+}
+
+.productData {
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkoutContainer {
+  padding: 3%;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.checkoutContainer div {
   display: flex;
   flex-direction: column;
+  text-align: center;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.checkoutContainer div button {
+  width: 50%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.productDetails img {
+  width: 100%;
+  height: 450px;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 767px) {
+  .productList img {
+    width: 100%;
+    height: 250px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .checkoutContainer div {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .checkoutContainer div button {
+    width: 40%;
+  }
+
+  .productDetails img {
+    width: 100%;
+    height: 250px;
   }
 }
