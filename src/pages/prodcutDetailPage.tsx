@@ -16,6 +16,7 @@ interface Product {
     brand: string;
     weight: string;
     reviews: Review[];
+    availability: boolean
 }
 
 interface Review {
@@ -47,6 +48,12 @@ const GET_PRODUCT_DETAILS = gql`
       material
       brand
       weight
+      availability
+      dimensions {
+        length
+        width
+        height
+      }
       reviews {
         title
         rating
@@ -59,23 +66,22 @@ const GET_PRODUCT_DETAILS = gql`
 `;
 
 const ProductDetailsPage: React.FC = () => {
-    // const { id } = useParams<{ id: string }>();
     const { id = "" } = useParams();
 
     const targetRef = useRef<HTMLDivElement>(null);
     const [getProducts, { loading, error, data }] = useLazyQuery<ProductData, ProductVariables>(
         GET_PRODUCT_DETAILS
     );
-
-    const handleScroll = () => {
-        targetRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
     useEffect(() => {
         if (id) {
             getProducts({ variables: { searchText: id } });
         }
     }, [id]);
+
+    const handleScroll = () => {
+        targetRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
 
     const showRating = (reviews: Review[]): number => {
         let totalRating = 0;
@@ -125,23 +131,59 @@ const ProductDetailsPage: React.FC = () => {
                 <div className='row'>
                     <div className='col-sm-6'><img src={data.getProductById.image} /> </div>
                     <div className='col-sm-6'>
-                        <h3>{data.getProductById.name}</h3>
-                        <p>{data.getProductById.price}</p>
-                        <Rating rating={showRating(data.getProductById.reviews)} handleScroll={handleScroll} />
-                        <div><b>Color: </b>{data.getProductById.color}</div>
-                        <div><b>Size: </b>{data.getProductById.size}</div>
-                        <div><b>Material: </b>{data.getProductById.material}</div>
-                        <div><b>brand: </b>{data.getProductById.brand}</div>
-                        <div><b>weight: </b>{data.getProductById.weight}</div>
+                        <h4>{data.getProductById.name}</h4>
+                        <div>{data.getProductById.price}</div>
+                        <div className='productRatings'>
+                            <Rating rating={showRating(data.getProductById.reviews)} handleScroll={handleScroll} />
+                            <div onClick={handleScroll}> {data.getProductById.reviews.length} Reviews</div>
+                        </div>
+                        <hr />
+                        <div> <b>Product Info </b></div>
 
+                        <table className='productInfo'>
+                            <tr><td><b>Color:     </b></td><td>{data.getProductById.color}</td></tr>
+                            <tr><td><b>Size:      </b></td><td>{data.getProductById.size}</td></tr>
+                            <tr><td><b>Material:   </b></td><td>{data.getProductById.material}</td></tr>
+                            <tr><td><b>brand:   </b></td><td>{data.getProductById.brand}</td></tr>
+                            <tr><td><b>weight:   </b></td><td>{data.getProductById.weight}</td></tr>
+
+                        </table>
+                        <hr />
+                        <div> <b>Product Dimensions </b></div>
+                        <div className='productDimensions'>
+                            <div><span><b>Length:</b></span><span>{data.getProductById.color}</span></div>
+                            <div> <span><b>Width:</b></span><span>{data.getProductById.color}</span></div>
+                            <div><span><b>Height:</b></span><span>{data.getProductById.color}</span></div>
+                        </div>
+                        <hr />
+                        <h4 >Product Description</h4>
                         <div>{data.getProductById.description}</div>
-
+                        <div className='productListCheckout'>
+                            {
+                                data.getProductById.availability ? (
+                                    <div>
+                                        <button type="button" className="btn btn-primary">
+                                            Add to Cart
+                                        </button>
+                                        <button type="button" className="btn btn-danger">
+                                            Buy Now
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <button type="button" className="btn btn-danger">
+                                            Out of Stock
+                                        </button>
+                                    </div>
+                                )
+                            }
+                        </div>
                     </div>
 
                 </div>
             }
-            <div className='row' ref={targetRef}>
-                <h3>User Reviews</h3>
+            <div className='row' style={{ marginTop: "10px" }} ref={targetRef}>
+                <h4>User Reviews</h4>
                 {data && data.getProductById.reviews.map((i: Review) => (
                     <>
                         <div className='col-12'>

@@ -1,10 +1,12 @@
-import React from 'react'
-
+import myImage from '../utils/productlogo.png';
 
 const Header = () => {
     return (
         <div>      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-            <a className="navbar-brand" href="/">Logo</a>
+            <a className="navbar-brand" href="/">
+                <img className="logo" style={{ height: "40px" }} src={myImage} alt="React Logo" />
+
+            </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>

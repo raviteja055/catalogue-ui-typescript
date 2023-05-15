@@ -25,6 +25,12 @@ body {
   height: 185px;
 }
 
+.productTitle,
+.productFilters {
+  display: flex;
+  justify-content: space-between;
+}
+
 .productList {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
@@ -49,6 +55,16 @@ body {
   gap: 10px;
 }
 
+.productListCheckout div {
+  display: flex;
+  flex-direction: rpw;
+  text-align: center;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+
 .checkoutContainer div button {
   width: 50%;
 }
@@ -58,7 +74,35 @@ body {
   height: 450px;
 }
 
+.productInfo {
+  width: 40%;
+}
+
+.productInfo div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.productRatings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.productDimensions {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 767px) {
+  .productInfo {
+    width: 90%;
+  }
+
+  body p,
+  body div {
+    font-size: 14px;
+  }
+
   .productList img {
     width: 100%;
     height: 250px;
@@ -78,6 +122,22 @@ body {
 
   .productDetails img {
     width: 100%;
-    height: 250px;
+    height: 400px;
+  }
+
+  .productTitle,
+  .productFilters {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .productData div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .productFilters input {
+    width: 70%;
   }
 }

@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'https://node-git-main-raviteja055.vercel.app/graphql',
+  uri: 'http://localhost:2900/graphql',
+  // uri: 'https://node-git-main-raviteja055.vercel.app/graphql',
   cache: new InMemoryCache(),
 });
 const root = ReactDOM.createRoot(
