@@ -18,4 +18,12 @@ Before running this project, ensure that you have the following software install
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/your-username/react-project.git
+   git clone https://github.com/raviteja055/catalogue-ui-typescript.git
+
+   cd catalogue-ts
+
+   git checkout master
+
+   npm install
+
+   npm start
